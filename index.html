@@ -1,15 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego</title>
-    
+    <title>SE-I</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <header>
+        <h1>JuegoApi</h1>
+        <div class="container-cerrar">
+            <button id="logout" name="logout" class="btnClaro" hidden>Cerrar sesión</button>
+        </div>
+    </header>
+    <div class="container">
+        <div class="container-log" id="container-log">
+            <div class="container-input">
+                <input type="email" placeholder="Correo" id="email" name="email">
+                <input type="password" placeholder="Contraseña" id="password" name="password">
+            </div>
+            <div class="button-container">
+                <button id="crear" name="crear">Crear</button>
+                <button id="login" name="login">Iniciar sesión</button>
+            </div>
+            <br>
+            <hr {width: 50vw}>
+            <br>
+            <div class="button-container">
+                <button id="google" name="google" class="btnGoogle">Google</button>
+                <button id="fb" name="fb" class="btnFb">Facebook</button>
+                <button id="git" name="btn" class="btnGitHub">GitHub</button>
+                <button id="yahoo" class="btnYahoo">Yahoo</button>
+            </div>
+            <!-- <div class="mensajes" id="mensajes"></div> -->
+            
+        </div>
+        <div id="juego" hidden></div>
+
+        
+        
+    </div>
+
     <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script> -->
     <script src="./js/phaser.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/juego.js"></script>
+    <!-- <script src="./js/index.js"></script> -->
 </body>
+<script type="module" src="/js/index.js"></script>
 </html>

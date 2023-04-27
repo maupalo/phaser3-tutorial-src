@@ -1,0 +1,230 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+
+}
+
+button {
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 0%;
+    border: 0px;
+    margin-top: 0.5em;
+    margin-right: 1em;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+select {
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 0%;
+    border: 0px;
+    margin-top: 0.5em;
+    margin-right: 1em;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+}
+
+.btnClaro {
+    background-color: white;
+    color: black;
+    margin-left: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: blue;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    color: white
+}
+
+.container-log {
+    padding: 1rem;
+    background-color: white;
+    border: 2px;
+    border-color: black;
+    border-radius: 15px;
+    margin: 2em;
+    text-align: center;
+}
+
+input {
+    border-radius: 15px;
+    padding: 6px;
+    width: 15%;
+}
+
+.container-buscador {
+    margin: 1vh;
+    text-align: center;
+    width: 90vw;
+
+
+}
+
+.container-buscador>div {
+    margin: 3vh
+}
+
+.resultados {
+    background-color: #ccc;
+    border-radius: 15px;
+    /* display: flex; */
+    flex-direction: column;
+    padding: 50px;
+    margin-bottom: 70px;
+    width: 50%;
+    align-self: center;
+}
+
+.resultados>div {
+    width: 100%;
+    align-self: center;
+}
+
+.btnGitHub {
+    background-color: gray;
+}
+.btnYahoo {
+    background-color:purple;
+}
+
+.mensajes {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.container-boton {
+    text-align: right;
+}
+
+.container-cerrar {
+    text-align: right;
+    margin-right: 1%;
+}
+
+.btnGoogle {
+    background-color: red;
+    border: 0px;
+}
+
+.btnFb {
+    background-color: blue;
+    border: 0px;
+}
+
+.buscador {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    text-align: center;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container-input {
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    margin-right: 15px;
+}
+
+.container-input input {
+    display: block;
+    width: 90%;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .container-input {
+        display: block;
+    }
+
+    .container-input input {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .button-container {
+        display: block;
+    }
+
+    .button-container button {
+        display: block;
+        width: 100%;
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: lightgray;
+    text-align: right;
+    padding-right: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.container-poke {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.link-mapa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#resultName {
+    text-align: center;
+}
+
+.img-poke {
+    height: 50px;
+    width: 50px;
+}
+
+.img-poke-big {
+    height: 100px;
+    width: 100px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
