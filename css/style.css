@@ -79,7 +79,8 @@ input {
 }
 
 .resultados {
-    background-color: #ccc;
+    background-color: darkslategray;
+    color: white;
     border-radius: 15px;
     /* display: flex; */
     flex-direction: column;
@@ -138,7 +139,10 @@ table {
     text-align: center;
     width: 100%;
 }
-
+h2{
+    text-align: center;
+    color:gold
+}
 .button-container {
     display: flex;
     flex-wrap: wrap;

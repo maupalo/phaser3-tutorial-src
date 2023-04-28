@@ -4,7 +4,10 @@ const elementos = {
     containerLog: document.getElementById("container-log"),
     juego: document.getElementById("juego"),
     mensajes: document.getElementById("mensajes"),
-    crud: document.getElementById("containerCRUD"),
+    containerJuego: document.getElementById("container-juego"),
+    resultados: document.getElementById("highscores"),
+    reiniciar: document.getElementById("reiniciar"),
+    
     //botones
     btnCrear: document.getElementById("crear"),
     btnIniciar: document.getElementById("login"),
@@ -13,6 +16,7 @@ const elementos = {
     btnYahoo: document.getElementById("yahoo"),
     btnFb: document.getElementById("fb"),
     btnGitHub: document.getElementById("git"),
+    btnHigh: document.getElementById("btnHigh")
   
     
 

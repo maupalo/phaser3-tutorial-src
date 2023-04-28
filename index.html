@@ -29,6 +29,7 @@
             <br>
             <hr {width: 50vw}>
             <br>
+
             <div class="button-container">
                 <button id="google" name="google" class="btnGoogle">Google</button>
                 <button id="fb" name="fb" class="btnFb">Facebook</button>
@@ -38,16 +39,25 @@
             <!-- <div class="mensajes" id="mensajes"></div> -->
             
         </div>
-        <div id="juego" hidden></div>
+
+        <div class="container-poke" id="container-juego" hidden>
+            <div class="containerCRUD" id="juego" hidden></div>
+        <a href="#highscores" style="align-self: center;"><button id="btnHigh" class="btnBuscar" hidden>HIGH SCORES</button></a>
+        <a href="/" style="align-self: center;"><button class="btnBuscar" id="reiniciar" hidden>Reiniciar juego</button></a>
+        <div class="resultados" id="highscores" hidden></div>
+        </div>
+        
+        
 
         
         
     </div>
 
     <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script> -->
-    <script src="./js/phaser.js"></script>
-    <script src="./js/juego.js"></script>
+    
     <!-- <script src="./js/index.js"></script> -->
 </body>
+<script src="/js/phaser.js"></script>
+    <script src="/js/juego.js"></script>
 <script type="module" src="/js/index.js"></script>
 </html>
