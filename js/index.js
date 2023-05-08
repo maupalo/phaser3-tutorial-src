@@ -461,7 +461,7 @@ async function hitBomb(player, bomb) {
   player.anims.play('turn');
 
   gameOver = true;
-
+  alert("¡PERDISTE!")
   // Add a new document with a generated id.
   const docRef = await addDoc(collection(db, "highscores"), {
     name: uid,
@@ -479,7 +479,7 @@ async function hitBomb2(player2, bomb) {
   player2.anims.play('turn');
 
   gameOver = true;
-
+  alert("¡PERDISTE!")
   // Add a new document with a generated id.
   const docRef = await addDoc(collection(db, "highscores"), {
     name: uid,
