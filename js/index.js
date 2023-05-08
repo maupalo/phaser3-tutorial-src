@@ -198,7 +198,7 @@ onAuthStateChanged(auth, (user) => {
     elementos.btnHigh.removeAttribute("hidden");
     elementos.reiniciar.removeAttribute("hidden");
     elementos.containerLog.setAttribute("hidden", "hidden");
-    
+
     //elementos.crud.removeAttribute("hidden");
     // ...
   } else {
@@ -220,22 +220,22 @@ onAuthStateChanged(auth, (user) => {
 //----------AQUÍ EMPIEZA EL JUEGO----------
 
 var config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 430,
-    parent: "juego",
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
+  type: Phaser.AUTO,
+  width: 800,
+  height: 430,
+  parent: "juego",
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 300 },
+      debug: false
     }
+  },
+  scene: {
+    preload: preload,
+    create: create,
+    update: update
+  }
 };
 var score = 0;
 var scoreText;
@@ -243,161 +243,266 @@ var scoreText;
 var game = new Phaser.Game(config);
 
 function preload() {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
-    this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude',
-        'assets/dude.png',
-        { frameWidth: 32, frameHeight: 48 }
-    );
+  this.load.image('sky', 'assets/sky.png');
+  this.load.image('ground', 'assets/platform.png');
+  this.load.image('star', 'assets/star.png');
+  this.load.image('bomb', 'assets/bomb.png');
+  this.load.spritesheet('dude',
+    'assets/dude.png',
+    { frameWidth: 32, frameHeight: 48 }
+  );
+  this.load.spritesheet('dude2',
+    'assets/dude2.png',
+    { frameWidth: 32, frameHeight: 48 }
+  );
 }
 
 var platforms;
 var player;
+var player2;
 var stars;
 var bombs;
 var cursors;
 var gameOver;
 
+let keyA;
+let keyS;
+let keyD;
+let keyW;
+
 function create() {
-    this.add.image(400, 300, 'sky');
+  this.add.image(400, 300, 'sky');
 
-    platforms = this.physics.add.staticGroup();
+  platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 458, 'ground').setScale(2).refreshBody();
+  platforms.create(400, 458, 'ground').setScale(2).refreshBody();
 
-    platforms.create(600, 370, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(520, 100, 'ground');
+  platforms.create(600, 370, 'ground');
+  platforms.create(50, 250, 'ground');
+  platforms.create(520, 100, 'ground');
 
 
-    player = this.physics.add.sprite(100, 400, 'dude');
+  player = this.physics.add.sprite(100, 400, 'dude');
+  player2 = this.physics.add.sprite(100, 400, 'dude2');
 
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
+  player.setBounce(0.2);
+  player.setCollideWorldBounds(true);
+  player2.setBounce(0.2);
+  player2.setCollideWorldBounds(true);
 
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 10,
-        repeat: -1
-    });
+  this.anims.create({
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
 
-    this.anims.create({
-        key: 'turn',
-        frames: [{ key: 'dude', frame: 4 }],
-        frameRate: 20
-    });
+  this.anims.create({
+    key: 'turn',
+    frames: [{ key: 'dude', frame: 4 }],
+    frameRate: 20
+  });
 
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    player.body.setGravityY(200)
-    this.physics.add.collider(player, platforms);
+  this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  player.body.setGravityY(200)
+  this.physics.add.collider(player, platforms);
+  //---------JUGADOR 2---------------------
+  this.anims.create({
+    key: 'A',
+    frames: this.anims.generateFrameNumbers('dude2', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
 
-    stars = this.physics.add.group({
-        key: 'star',
-        repeat: 11,
-        setXY: { x: 12, y: 0, stepX: 70 }
-    });
+  this.anims.create({
+    key: 'W',
+    frames: [{ key: 'dude2', frame: 4 }],
+    frameRate: 20
+  });
 
-    stars.children.iterate(function (child) {
+  this.anims.create({
+    key: 'D',
+    frames: this.anims.generateFrameNumbers('dude2', { start: 5, end: 8 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  player2.body.setGravityY(200)
+  this.physics.add.collider(player2, platforms);
+  //--------------------------------
 
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+  stars = this.physics.add.group({
+    key: 'star',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
+  });
 
-    });
-    this.physics.add.collider(stars, platforms);
-    this.physics.add.overlap(player, stars, collectStar, null, this);
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+  stars.children.iterate(function (child) {
 
-    bombs = this.physics.add.group();
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
-this.physics.add.collider(bombs, platforms);
+  });
+  this.physics.add.collider(stars, platforms);
+  this.physics.add.overlap(player, stars, collectStar, null, this);
+  this.physics.add.overlap(player2, stars, collectStar2, null, this);
+  scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-this.physics.add.collider(player, bombs, hitBomb, null, this);
+  bombs = this.physics.add.group();
+
+  this.physics.add.collider(bombs, platforms);
+
+  this.physics.add.collider(player, bombs, hitBomb, null, this);
+  this.physics.add.collider(player2, bombs, hitBomb2, null, this);
+
+  keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+  keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+  keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+  keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
 }
 function update() {
-    cursors = this.input.keyboard.createCursorKeys();
-    if (cursors.left.isDown) {
-        player.setVelocityX(-160);
+  cursors = this.input.keyboard.createCursorKeys();
+  if (cursors.left.isDown) {
+    player.setVelocityX(-160);
 
-        player.anims.play('left', true);
-    }
-    else if (cursors.right.isDown) {
-        player.setVelocityX(160);
+    player.anims.play('left', true);
+  }
+  else if (cursors.right.isDown) {
+    player.setVelocityX(160);
 
-        player.anims.play('right', true);
-    }
-    else {
-        player.setVelocityX(0);
-
-        player.anims.play('turn');
-    }
-
-    if (cursors.up.isDown && player.body.touching.down) {
-        player.setVelocityY(-400);
-    }
-}
-function collectStar (player, star)
-{
-    star.disableBody(true, true);
-
-    score += 10;
-    scoreText.setText('Score: ' + score);
-
-    if (stars.countActive(true) === 0)
-    {
-        stars.children.iterate(function (child) {
-
-            child.enableBody(true, child.x, 0, true, true);
-
-        });
-
-        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-        var bomb = bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
-    }
-}
-async function hitBomb (player, bomb)
-{
-    this.physics.pause();
-
-    player.setTint(0xff0000);
+    player.anims.play('right', true);
+  }
+  else {
+    player.setVelocityX(0);
 
     player.anims.play('turn');
+  }
 
-    gameOver = true;
+  if (cursors.up.isDown && player.body.touching.down) {
+    player.setVelocityY(-400);
+  }
+  //-------------------JUGADOR 2 --------
 
-// Add a new document with a generated id.
-const docRef = await addDoc(collection(db, "highscores"), {
-  name: uid,
-  score: score
-});
-console.log("Document written with ID: ", docRef.id);
+  if (keyA.isDown) {
+    player2.setVelocityX(-160);
+
+    player2.anims.play('A', true);
+  }
+  else if (keyD.isDown) {
+    player2.setVelocityX(160);
+
+    player2.anims.play('D', true);
+  }
+  else {
+    player2.setVelocityX(0);
+
+    player2.anims.play('W');
+  }
+
+  if (keyW.isDown && player2.body.touching.down) {
+    player2.setVelocityY(-400);
+  }
+
+
 }
+function collectStar(player, star) {
+  star.disableBody(true, true);
+
+  score += 10;
+  scoreText.setText('Score: ' + score);
+
+  if (stars.countActive(true) === 0) {
+    stars.children.iterate(function (child) {
+
+      child.enableBody(true, child.x, 0, true, true);
+
+    });
+
+    var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    var bomb = bombs.create(x, 16, 'bomb');
+    bomb.setBounce(1);
+    bomb.setCollideWorldBounds(true);
+    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
+  }
+}
+function collectStar2(player2, star) {
+  star.disableBody(true, true);
+
+  score += 10;
+  scoreText.setText('Score: ' + score);
+
+  if (stars.countActive(true) === 0) {
+    stars.children.iterate(function (child) {
+
+      child.enableBody(true, child.x, 0, true, true);
+
+    });
+
+    var x = (player2.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    var bomb = bombs.create(x, 16, 'bomb');
+    bomb.setBounce(1);
+    bomb.setCollideWorldBounds(true);
+    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
+  }
+}
+async function hitBomb(player, bomb) {
+  this.physics.pause();
+
+  player.setTint(0xff0000);
+
+  player.anims.play('turn');
+
+  gameOver = true;
+
+  // Add a new document with a generated id.
+  const docRef = await addDoc(collection(db, "highscores"), {
+    name: uid,
+    score: score
+  });
+  console.log("Document written with ID: ", docRef.id);
+}
+
+
+async function hitBomb2(player2, bomb) {
+  this.physics.pause();
+
+  player2.setTint(0xff0000);
+
+  player2.anims.play('turn');
+
+  gameOver = true;
+
+  // Add a new document with a generated id.
+  const docRef = await addDoc(collection(db, "highscores"), {
+    name: uid,
+    score: score
+  });
+  console.log("Document written with ID: ", docRef.id);
+}
+
+
 elementos.btnHigh.addEventListener("click", async () => {
   elementos.resultados.removeAttribute("hidden");
   var q = query(collection(db, "highscores"), orderBy("score", "desc"), limit(3));
- 
-  
-const querySnapshot = await getDocs(q);
-console.log(querySnapshot)
-var estadisticas = "<h2>TOP 3🏆</h2><ul>"
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-        estadisticas = estadisticas.concat(`<li><b>${doc.data().name}:</b> ${doc.data().score}</li>`)
-        console.log(estadisticas)
-});
-estadisticas=estadisticas.concat("</ul>")
-  elementos.resultados.innerHTML=estadisticas
+
+
+  const querySnapshot = await getDocs(q);
+  console.log(querySnapshot)
+  var estadisticas = "<h2>TOP 3🏆</h2><ul>"
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+    estadisticas = estadisticas.concat(`<li><b>${doc.data().name}:</b> ${doc.data().score}</li>`)
+    console.log(estadisticas)
+  });
+  estadisticas = estadisticas.concat("</ul>")
+  elementos.resultados.innerHTML = estadisticas
 })
