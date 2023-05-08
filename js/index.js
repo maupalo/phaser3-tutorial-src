@@ -349,7 +349,7 @@ function create() {
   this.physics.add.collider(stars, platforms);
   this.physics.add.overlap(player, stars, collectStar, null, this);
   //this.physics.add.overlap(player2, stars, collectStar2, null, this);
-  scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFFFFF' });
+  scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#00000' });
 
   bombs = this.physics.add.group();
 
