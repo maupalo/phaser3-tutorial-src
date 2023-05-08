@@ -283,7 +283,7 @@ function create() {
 
 
   player = this.physics.add.sprite(100, 400, 'dude');
-  player2 = this.physics.add.sprite(100, 400, 'dude2');
+  player2 = this.physics.add.sprite(400, 0, 'dude2');
 
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
@@ -348,7 +348,7 @@ function create() {
   });
   this.physics.add.collider(stars, platforms);
   this.physics.add.overlap(player, stars, collectStar, null, this);
-  this.physics.add.overlap(player2, stars, collectStar2, null, this);
+  //this.physics.add.overlap(player2, stars, collectStar2, null, this);
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
   bombs = this.physics.add.group();
@@ -356,7 +356,7 @@ function create() {
   this.physics.add.collider(bombs, platforms);
 
   this.physics.add.collider(player, bombs, hitBomb, null, this);
-  this.physics.add.collider(player2, bombs, hitBomb2, null, this);
+  this.physics.add.collider(player, player2, hitBomb2, null, this);
 
   keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
   keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -388,12 +388,12 @@ function update() {
   //-------------------JUGADOR 2 --------
 
   if (keyA.isDown) {
-    player2.setVelocityX(-160);
+    player2.setVelocityX(-170);
 
     player2.anims.play('A', true);
   }
   else if (keyD.isDown) {
-    player2.setVelocityX(160);
+    player2.setVelocityX(170);
 
     player2.anims.play('D', true);
   }
